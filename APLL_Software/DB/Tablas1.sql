@@ -1,3 +1,5 @@
+--Tablas 1 Abby
+
 CREATE TABLE Venta (
   Numero_Orden INT PRIMARY KEY,
   CajaDPI INT,
@@ -41,4 +43,128 @@ CREATE TABLE Inventario (
   Cantidad_Minima INT,
   FOREIGN KEY (CarroID) REFERENCES Carro(CarroID),
   FOREIGN KEY (RepuestoID) REFERENCES Repuestos(RepuestoID)
+);
+
+--Tablas 2 Abby
+
+CREATE TABLE Departamentos (
+  DepaID INT PRIMARY KEY,
+  Nombre VARCHAR
+);
+
+CREATE TABLE Repuestos (
+  RepuestoID INT PRIMARY KEY,
+  CarroID INT,
+  Nombre VARCHAR,
+  Categoria VARCHAR,
+  Precio_Unitario DECIMAL,
+  FOREIGN KEY (CarroID) REFERENCES Carro(CarroID)
+);
+
+CREATE TABLE Compra_Repuesto (
+  CompraRepuestoID INT PRIMARY KEY,
+  RepuestoID INT,
+  Costo DECIMAL,
+  ProveedorID INT,
+  FOREIGN KEY (RepuestoID) REFERENCES Repuestos(RepuestoID),
+  FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
+);
+
+CREATE TABLE Usuario (
+  EmpleadoDPI INT,
+  Usuario VARCHAR,
+  FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI)
+);
+
+CREATE TABLE Proveedor (
+  ProveedorID INT PRIMARY KEY,
+  Nombre VARCHAR,
+  Direccion VARCHAR,
+  Contacto VARCHAR
+);
+
+--Tablas 3 Derek
+
+CREATE TABLE Carro (
+  CarroID INT PRIMARY KEY,
+  Marca VARCHAR,
+  Modelo VARCHAR,
+  Transmision VARCHAR
+);
+
+
+
+CREATE TABLE Empleados (
+  EmpleadoDPI INT PRIMARY KEY,
+  Nombres VARCHAR,
+  Apellidos VARCHAR,
+  Sueldo DECIMAL
+);
+
+
+
+CREATE TABLE Comisiones (
+  ComisionID INT PRIMARY KEY,
+  EmpleadoDPI INT,
+  NumOrden INT,
+  Tipo VARCHAR,
+  FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI),
+  FOREIGN KEY (NumOrden) REFERENCES Venta(Numero_Orden)
+);
+
+
+CREATE TABLE Cotizacion (
+  CotizacionID INT PRIMARY KEY,
+  VendedorID INT,
+  Total DECIMAL,
+  Fecha TIMESTAMP,
+  FOREIGN KEY (VendedorID) REFERENCES Empleados(EmpleadoDPI)
+);
+
+CREATE TABLE Cotizacion_Detalle (
+  CotizacionDetalleID INT PRIMARY KEY,
+  CotizacionID INT,
+  RepuestoID INT,
+  Cantidad INT,
+  Precio_Unitario DECIMAL,
+  Precio_Total DECIMAL,
+  Numero_Linea INT,
+  FOREIGN KEY (CotizacionID) REFERENCES Cotizacion(CotizacionID),
+  FOREIGN KEY (RepuestoID) REFERENCES Repuestos(RepuestoID)
+);
+
+CREATE TABLE Compra_Carro (
+  Fecha TIMESTAMP,
+  Cantidad INT,
+  CarroID INT,
+  FOREIGN KEY (CarroID) REFERENCES Carro(CarroID)
+);
+
+
+
+CREATE TABLE Bitacora_Alertas (
+  AlertaID INT PRIMARY KEY,
+  RepuestoID INT,
+  Fecha TIMESTAMP,
+  FOREIGN KEY (RepuestoID) REFERENCES Repuestos(RepuestoID)
+);
+
+CREATE TABLE Historial_Cambio (
+  CambioID INT PRIMARY KEY,
+  Tipo_Cambio VARCHAR,
+  Tabla_Afectada VARCHAR,
+  ID_Registro INT,
+  Usuario VARCHAR,
+  Fecha TIMESTAMP,
+  Comentario VARCHAR
+);
+
+CREATE TABLE Cambios_Salarios (
+  Cambio_SalarioID INT PRIMARY KEY,
+  EmpleadoDPI INT,
+  Fecha_Cambio TIMESTAMP,
+  Salario_Anterior DECIMAL,
+  Salario_Nuevo DECIMAL,
+  Motivo VARCHAR,
+  FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI)
 );
