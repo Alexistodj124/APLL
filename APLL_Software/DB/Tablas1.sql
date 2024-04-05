@@ -168,3 +168,9 @@ CREATE TABLE Cambios_Salarios (
   Motivo VARCHAR,
   FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI)
 );
+
+-- Inserts Ana Paula
+INSERT INTO Detalles_Venta (Numero_Orden, RepuestoID, Cantidad, Rebaja, SubTotal)
+VALUES (1, 101, 1, 0.20, 150.00),
+       (1, 102, 2, 0.10, 250.00),
+       (2, 103, 3, 0.20, 350.00);
