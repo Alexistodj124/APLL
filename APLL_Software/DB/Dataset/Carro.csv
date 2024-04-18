@@ -1,0 +1,5 @@
+NIT, Nombre_Cliente, Contacto, Tipo
+"Mazda", "CX7", "2010", "Automatico"
+"Toyota", "Corolla", "1997", "Automatico"
+"Kia", "Ceed", "2008", "Manual"
+"Hyundai", "", "", "Automatico"
