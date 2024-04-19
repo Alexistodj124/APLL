@@ -1,3 +1,5 @@
 ProveedorID, Nombre, Direccion, Contacto
-01, "Mario Frater", "Zona 2, 2-13, 10ma calle", "08312343"
-02, "Piezas La Tuerca", "Zona 8, Bodega Los Álamos", "LaTuerca@gmail.com"
+1, "Mario Frater", "Zona 2, 2-13, 10ma calle", "08312343"
+2, "Piezas La Tuerca", "Zona 8, Bodega Los Álamos", "LaTuerca@gmail.com"
+3, "Repuestos Torque", "Zona 2, 2-50 5ta avenida", "99133345"
+4, "Andrés Perez", "Zona 5, 5-43", "19783465"

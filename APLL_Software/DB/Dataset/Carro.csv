@@ -1,5 +1,5 @@
-NIT, Nombre_Cliente, Contacto, Tipo
-"Mazda", "CX7", "2010", "Automatico"
-"Toyota", "Corolla", "1997", "Automatico"
-"Kia", "Ceed", "2008", "Manual"
-"Hyundai", "", "", "Automatico"
+CarroID, Marca, Linea, Modelo, Transmision
+1,"Mazda", "CX7", "2010", "Automatico"
+2,"Toyota", "Corolla", "1997", "Automatico"
+3,"Kia", "Ceed", "2008", "Manual"
+4,"Hyundai", "Elantra", "2003", "Automatico"
