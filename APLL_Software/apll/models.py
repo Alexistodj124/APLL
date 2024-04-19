@@ -2,6 +2,7 @@ from django.db import models
 
 from django.db import models
 
+
 class Cliente(models.Model):
     NIT = models.IntegerField(primary_key=True)
     Nombre_Cliente = models.CharField(max_length=255)

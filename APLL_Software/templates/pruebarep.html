@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba Repuestos</title>
+</head>
+<body>
+    {% extends 'base.html'%}
+
+    {% block content %}
+    <form method="get" action="">
+        <label for="marca">Marca:</label>
+        <select name="marca" onchange="this.form.submit()">
+            <option value="">--- Select a Marca ---</option>
+            {% for marca in marcas %}
+            <option value="{{ marca }}" {% if marca == marca_selected %}selected{% endif %}>{{ marca }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="linea">Linea:</label>
+        <select name="linea" onchange="this.form.submit()" {% if not lineas %}disabled{% endif %}>
+            <option value="">--- Select a Linea ---</option>
+            {% for linea in lineas %}
+            <option value="{{ linea }}" {% if linea == linea_selected %}selected{% endif %}>{{ linea }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="modelo">Modelo:</label>
+        <select name="modelo" {% if not modelos %}disabled{% endif %}>
+            <option value="">--- Select a Modelo ---</option>
+            {% for modelo in modelos %}
+            <option value="{{ modelo }}">{{ modelo }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Results:</h2>
+    <ul>
+        {% for carro in carros %}
+        <li>{{ carro.Marca }} {{ carro.Linea }} {{ carro.Modelo }}</li>
+        {% endfor %}
+    </ul>
+    {% endblock %}
+</body>
+</html>
