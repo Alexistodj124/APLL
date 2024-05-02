@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadre de Caja</title>
+    <style>
+        body {
+            background-color: #570303;
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+        h2{
+            text-align: center;
+            color:#ffffff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #000000;
+        }
+
+        li:hover {
+            background-color: #eaeaea;
+        }
+
+        .numero-orden {
+            font-weight: bold;
+        }
+
+        .total {
+            color: #007bff;
+        }
+
+        .metodo-pago {
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cuadre de caja</h1>
+        <h2>Ventas</h2>
+        <ul>
+            {% for venta in ventas %}
+                <li>
+                    <span class="numero-orden">{{ venta.Numero_Orden }}</span> 
+                    <span class="resumen">{{venta.Total}}</span>
+                    {%if venta.Descripcion%}
+                        <span class="descripcion"> {{venta.Descripcion}}</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul> 
+        <h2>Totales</h2>
+        <ul>
+            <li>Ventas: <span class="total-ventas">{{total_ventas}}</span></li>
+            <li>Efectivo en Caja: <span class="efectivo-caja">{{efectivo_caja}}</span></li>
+            <li>Comisiones: <span class="comisiones">{{comisiones}}</span></li>
+        </ul> 
+    </div>
+</body>
+</html>
+
