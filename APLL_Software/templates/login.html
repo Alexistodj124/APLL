@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url('../Img/Rojo.jpg');
+            background-size: cover;
+            background-position: center; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; 
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #ffffff; 
+            text-align: center;
+            line-height: normal;
+        }
+
+        label, input {
+            display: block;
+            margin: 10px auto;
+            color: #ffffff; 
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 200px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: #000000; 
+        }
+
+        input[type="submit"] {
+            width: 100px;
+            padding: 8px;
+            background-color: #470101;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4c0303;
+            color: #ffffff;
+
+        }
+
+        form {
+            text-align: center;
+            color: #000000;
+        }
+
+        .error-message {
+            color: #ff0000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br>
+        <input type="submit" value="Login">
+    </form>
+    {% if error %}
+    <p class="error-message">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
