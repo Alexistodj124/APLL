@@ -1,0 +1,4 @@
+Detalles_VentaID, Numero_Orden, RepuestoID, Cantidad, Rebaja, Subtotal
+123, 2, 2, 2, 0.00, 600.00
+456, 4, 3, 1, 0.00, 500.00
+789, 4, 1, 1, 0.00, 550.00 
