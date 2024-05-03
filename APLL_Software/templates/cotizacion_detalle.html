@@ -11,7 +11,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
+            display: grid;
             justify-content: center;
             align-items: center;
             height: 50vh;
@@ -33,21 +33,15 @@
 
         ul {
             list-style-type: none;
-            padding: 0;
-            color: #ffffff;
-        }
-
-        li {
-            margin-bottom: 10px;
             padding: 10px;
             background-color: #f9f9f9;
+            margin-bottom: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            color: #000000;
+            color: #000000;    
         }
-
-        li:hover {
-            background-color: #eaeaea;
+        li{
+            padding: 5px;
         }
         
         .cotizaciondetalle-id {
@@ -60,9 +54,15 @@
         <h1>Detalles de Cotización</h1>
         <ul>
             {% for detalle in detalles %}
-                <li>
-                    ID del Detalle de Cotización: <span class="cotizaciondetalle-id">{{ detalle.CotizacionDetalleID }}</span> - ID de la Cotización: {{ detalle.CotizacionID }} - ID del Repuesto: {{ detalle.RepuestoID }} - Cantidad: {{ detalle.Cantidad }} - Precio Unitario: {{ detalle.Precio_Unitario }} - Precio Total: {{ detalle.Precio_Total }} - Número de Línea: {{ detalle.Numero_Linea }}
-                </li>
+                <ul>
+                    <li> ID del Detalle de Cotización: <span class="cotizaciondetalle-id">{{ detalle.CotizacionDetalleID }}</span></li>
+                    <li>- ID de la Cotización: {{ detalle.CotizacionID }}</li>                    
+                    <li>- ID del Repuesto: {{ detalle.RepuestoID }}</li>
+                    <li>- Cantidad: {{ detalle.Cantidad }}</li>
+                    <li>- Precio Unitario: {{ detalle.Precio_Unitario }}</li>
+                    <li>- Precio Total: {{ detalle.Precio_Total }}</li>
+                    <li>- Número de Línea: {{ detalle.Numero_Linea }}</li>  
+                </ul>
             {% endfor %}
         </ul>
     </div>
