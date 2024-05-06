@@ -7,6 +7,9 @@ from django.shortcuts import redirect
 def home(request):
     return render(request, 'home.html')
 
+def login(request):
+    return render(request, 'login.html')
+
 
 def filter_carros(request):
     marcas = Carro.objects.values_list('Marca', flat=True).distinct()

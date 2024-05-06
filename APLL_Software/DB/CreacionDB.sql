@@ -184,3 +184,13 @@ BEGIN
         FROM inserted;
     END
 END;
+
+CREATE TABLE Cambio_Departamento (
+  CambioDepID SERIAL PRIMARY KEY,
+  NuevoDepartamento VARCHAR(50),
+  ViejoDepartamento VARCHAR(50),
+  EmpleadoDPI INT,
+  DepaID INT,
+  FOREIGN KEY (DepaID) REFERENCES Departamentos(DepaID),
+  FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI)
+);

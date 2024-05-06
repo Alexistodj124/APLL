@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Repuestos</title>
+    <style>
+        body {
+            background-color: #570303;
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid  #ffffff;
+            color: #ffffff;
+        }
+
+        tr:hover {
+            background-color: #eaeaea;
+        }
+
+        .nombre {
+            font-weight: bold;
+        }
+
+        .categoria {
+            color: #ffffff;
+        }
+        
+        .precio {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Repuestos</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>RepuestoID</th>
+                    <th>CarroID</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Precio_Unitario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repuesto in repuestos %}
+                <tr>
+                    <td>{{repuesto.RepuestoID}}</td>
+                    <td>{{repuesto.CarroID}}</td>
+                    <td>{{repuesto.Nombre}}</td>
+                    <td>{{repuesto.Categoria}}</td>
+                    <td>{{repuesto.Precio_Unitario}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

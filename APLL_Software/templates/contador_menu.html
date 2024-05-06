@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+    <style>
+        body {
+            background-color: #750303;
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin-top: 20px; 
+            color: #ffffff; 
+            text-align: center;
+            line-height: normal;
+        }
+        
+        button {
+            width: 300px;
+            font-size: 25px;
+            max-width: 300px;
+            margin: 10px;
+            padding: 20px;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+            line-height: 1.4;
+        }
+        
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Contador</h1>
+    <div class="button-container">
+        <a href="{% url 'gastos' %}"><button>Gastos</button></a>
+        <a href="{% url 'pagos' %}"><button>Pagos</button></a>
+        <a href="{% url 'comisiones' %}"><button>Comisiones</button></a>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'ventas' %}"><button>Ventas Mensuales</button></a>
+        <a href="{% url 'cierre_mensual' %}"><button>Cierre Mensual</button></a>
+    </div>
+</body>
+</html>

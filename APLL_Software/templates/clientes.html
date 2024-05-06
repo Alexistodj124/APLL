@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Clientes</title>
+    <style>
+        body {
+            background-color: #570303;
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            flex-direction: column;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #ffffff;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #ffffff;
+
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #000000;
+
+        }
+        li:hover {
+            background-color: #eaeaea;
+        }
+        .nombre {
+            font-weight: bold;
+        }
+        .contacto {
+            color: #777;
+        }
+        .tipo {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Clientes</h1>
+        <ul>
+            {% for cliente in clientes %}
+                <li>
+                    NIT: <span class="nombre">{{ cliente.NIT }}</span> - Nombre: <span class="nombre">{{ cliente.Nombre_Cliente }}</span> - Contacto: <span class="contacto">{{ cliente.Contacto }}</span> - Tipo: <span class="tipo">{{ cliente.Tipo }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
