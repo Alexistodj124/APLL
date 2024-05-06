@@ -168,3 +168,19 @@ CREATE TABLE Cambios_Salarios (
   Motivo VARCHAR(255),
   FOREIGN KEY (EmpleadoDPI) REFERENCES Empleados(EmpleadoDPI)
 );
+
+CREATE TRIGGER Fill_Historial_Cambio
+ON DATABASE
+FOR INSERT
+AS
+BEGIN
+    DECLARE @TableName NVARCHAR(255);
+    SET @TableName = (SELECT OBJECT_NAME(parent_id) FROM sys.triggers WHERE object_id = @@PROCID);
+    
+    IF @TableName <> 'historial_cambio'
+    BEGIN
+        INSERT INTO historial_cambio (tabla_afectada, fecha, usuario, tipo_cambio, comentario)
+        SELECT @TableName, GETDATE(), SUSER_SNAME(), 'INSERT', 'Nuevo registro insertado'
+        FROM inserted;
+    END
+END;
