@@ -106,7 +106,7 @@
         </div>
 </body>
 <body>
-    <h1>Buscador de Inventario</h1>
+    <h1>Buscador de Carros</h1>
     {% extends 'base.html'%}
 
     {% block content %}
@@ -154,30 +154,6 @@
             </div>
         </div>
         {% endblock %}
-    </div>
-</body>
-<body>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Carro ID</th>
-                    <th>Repuesto ID</th>
-                    <th>Existencia</th>
-                    <th>Cantidad Mínima</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in inventario %}
-                <tr>
-                    <td>{{ item.CarroID }}</td>
-                    <td>{{ item.RepuestoID }}</td>
-                    <td class="existencia">{{ item.Existencia }}</td> 
-                    <td class="cantidad-minima">{{ item.Cantidad_Minima }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
 </body>
 </html>
