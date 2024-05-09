@@ -60,6 +60,12 @@
                 </li>
             {% endfor %}
         </ul>
+
+        <ul>
+            {% if efectivo_insuficiente %}
+            <li class="alerta-efectivo">¡No hay suficiente efectivo para los pagos!</li>
+        {% endif %}
+        </ul>
     </div>
 </body>
 </html>
