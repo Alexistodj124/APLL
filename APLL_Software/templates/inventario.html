@@ -113,27 +113,14 @@
     <div class="container-inv">
         <form method="get" action="">
             <div class = "car-form">
-                <label for="marca">Marca:</label>
-                <select name="marca" onchange="this.form.submit()">
-                    <option value="">--- Select a Marca ---</option>
-                    {% for marca in marcas %}
-                    <option value="{{ marca }}" {% if marca == marca_selected %}selected{% endif %}>{{ marca }}</option>
-                    {% endfor %}
-                </select>
+                <label for="marca">Buscar por nombre:</label>
+                <input name="nombre" onchange="this.form.submit()"/>
 
-                <label for="linea">Linea:</label>
-                <select name="linea" onchange="this.form.submit()" {% if not lineas %}disabled{% endif %}>
-                    <option value="">--- Select a Linea ---</option>
-                    {% for linea in lineas %}
-                    <option value="{{ linea }}" {% if linea == linea_selected %}selected{% endif %}>{{ linea }}</option>
-                    {% endfor %}
-                </select>
-
-                <label for="modelo">Modelo:</label>
-                <select name="modelo" {% if not modelos %}disabled{% endif %}>
-                    <option value="">--- Select a Modelo ---</option>
-                    {% for modelo in modelos %}
-                    <option value="{{ modelo }}">{{ modelo }}</option>
+                <label for="tipo">Buscar por tipo:</label>
+                <select name="tipo" onchange="this.form.submit()" {% if not lineas %}disabled{% endif %}>
+                    <option value="">--- Selecciona un tipo ---</option>
+                    {% for tipo in tipos %}
+                    <option value="{{ tipo }}" {% if linea == tipo_selected %}selected{% endif %}>{{ tipo }}</option>
                     {% endfor %}
                 </select>
                 <br>
@@ -144,10 +131,18 @@
             <div class="container-results">
                 <h2>Resultados:</h2>
                 <table>
-                    <thead></thead>
+                    <thead>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                    </thead>
                     <tbody>¿
-                        {% for carro in carros %}
-                        <td>{{ carro.Marca }} {{ carro.Linea }} {{ carro.Modelo }}</td>
+                        {% for repuesto in repuestos %}
+                        <td>{{ repuesto.id }}</td>
+                        <td>{{ repuesto.nombre }}</td>
+                        <td>{{ repuesto.precio }}</td>
+                        <td>{{ repuesto.cantidad }}</td>
                         {% endfor %}
                     </tbody>
                 </table>

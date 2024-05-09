@@ -102,7 +102,7 @@
 <body>
     <div class="container">
         <div class= "form-container"> 
-            <a href="agregar_repuesto.html"><button>Agregar Repuesto</button></a>
+            <a href="agregar_carro.html"><button>Agregar Carro</button></a>
         </div>
 </body>
 <body>
@@ -144,10 +144,16 @@
             <div class="container-results">
                 <h2>Resultados:</h2>
                 <table>
-                    <thead></thead>
+                    <thead>
+                        <th>Marca</th>
+                        <th>Linea</th>
+                        <th>Modelo</th>
+                    </thead>
                     <tbody>¿
                         {% for carro in carros %}
-                        <td>{{ carro.Marca }} {{ carro.Linea }} {{ carro.Modelo }}</td>
+                        <td>{{ carro.Marca }}</td>
+                        <td>{{ carro.Linea }}</td>
+                        <td>{{ carro.Modelo }}</td>
                         {% endfor %}
                     </tbody>
                 </table>
