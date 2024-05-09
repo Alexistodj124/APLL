@@ -114,6 +114,14 @@ def contador_menu_view(request):
 def comprador_menu_view(request):
     return render(request, 'comprador_menu.html')
 
+def cierres_mensuales_view(request):
+    # Cambiar a URL CORRECTO
+    return render(request, 'vendedor_menu.html')
+
+def control_usuario_view(request):
+    # Cambiar a URL CORRECTO
+    return redirect('/admin')
+
 def lista_empleados(request):
     empleados = Empleados.objects.all()
     return render(request, 'empleado.html', {'empleados': empleados})
