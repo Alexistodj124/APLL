@@ -50,12 +50,12 @@
 <body>
     <h1>Vendedor</h1>
     <div class="button-container">
-        <a href="inventario.html"><button>Inventario</button></a>
-        <a href="inventario_carros.html"><button>Carros</button></a>
+        <a href="{% url 'lista_inventario' %}"><button>Inventario</button></a>
+        <a href="{% url 'lista_carros' %}"><button>Carros</button></a>
     </div>
     <div class="button-container">
-        <a href="ventas.html"><button>Venta</button></a>
-        <a href="cotizaciones.html"><button>Cotización</button></a>
+        <a href="{% url 'lista_ventas' %}"><button>Venta</button></a>
+        <a href="{% url 'lista_cotizaciones' %}"><button>Cotización</button></a>
     </div>
     <div class="button-container">
         <a href="{% url 'logout' %}"><button>Cerrar Sesion</button></a>

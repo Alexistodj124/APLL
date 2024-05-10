@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Carro
 from django.shortcuts import redirect
@@ -48,11 +49,10 @@ def custom_login(request):
                 # Redirect ventas users to a different URL
                 return redirect('vendedor_menu')
             else:
-                # For users not in admin or ventas group, redirect to the home page
-                return redirect('home')
+                messages.add_message(request, messages.ERROR, 'Usuario no pertenece a ningun GRUPO.')
         else:
             # Return an error message if authentication fails
-            messages.error(request, 'Invalid username or password.')
+            messages.error(request, 'Usuario o Contraseña Invalidos.')
     # If the request method is not POST or authentication fails, render the login page
     return render(request, 'login.html')
     
@@ -83,23 +83,6 @@ def filter_carros(request):
     }
     return render(request, 'pruebarep.html', context)
 
-
-
-def redirect_by_group(request):
-    if request.user.is_authenticated:
-        user_groups = request.user.groups.all()
-        if user_groups.filter(name='Admin').exists():
-            # Redireccionar a Pagina ADMIN 
-            return redirect('url_admin')
-        elif user_groups.filter(name='Ventas').exists():
-            # Redireccionar a pagina Ventas
-            return redirect('url_ventas')
-        else:
-            # Redireciona a home
-            return redirect('url_home')
-    else:
-        # Redirecciona a LOGIN
-        return redirect('url_login')
     
 
 
@@ -107,104 +90,250 @@ def redirect_by_group(request):
 def menu_view(request):
     return render(request, 'menu.html')
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required
 def vendedor_menu_view(request):
-    return render(request, 'vendedor_menu.html')
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
+        return render(request, 'vendedor_menu.html')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def admin_menu_view(request):
-    return render(request, 'admin_menu.html')
+    if request.user.groups.filter(name='admin').exists():
+        return render(request, 'admin_menu.html')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def contador_menu_view(request):
-    return render(request, 'contador_menu.html')
+    if request.user.groups.filter(name__in =['admin','contador']).exists():
+        return render(request, 'contador_menu.html')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
 def comprador_menu_view(request):
     return render(request, 'comprador_menu.html')
 
+@login_required
 def cierres_mensuales_view(request):
-    # Cambiar a URL CORRECTO
-    return render(request, 'vendedor_menu.html')
+    if request.user.groups.filter(name='admin').exists():
+        # Cambiar a URL CORRECTO
+        return render(request, 'vendedor_menu.html')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def control_usuario_view(request):
-    # Cambiar a URL CORRECTO
-    return redirect('/admin')
+    if request.user.groups.filter(name='admin').exists():
+        # Cambiar a URL CORRECTO
+        return redirect('/admin')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_empleados(request):
     # new_employee = Empleados(Nombres='', Apellidos='Hernandez', Sueldo=2600.00)
     # new_employee.save()
-    empleados = Empleados.objects.all()
-    return render(request, 'empleado.html', {'empleados': empleados})
+    
+    if request.user.groups.filter(name='admin').exists():
+        empleados = Empleados.objects.all()
+        return render(request, 'empleado.html', {'empleados': empleados})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_carros(request):
-    carros = Carro.objects.all()
-    return render(request, 'carros.html', {'carros': carros})
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
+        carros = Carro.objects.all()
+        return render(request, 'carros.html', {'carros': carros})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_repuestos(request):
-    repuestos = Repuestos.objects.all()
-    return render(request, 'repuestos.html', {'repuestos': repuestos})
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
+        repuestos = Repuestos.objects.all()
+        return render(request, 'repuestos.html', {'repuestos': repuestos})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_inventario(request):
-    inventario = Inventario.objects.all()
-    return render(request, 'inventario.html', {'inventario': inventario})
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
+        inventario = Inventario.objects.all()
+        return render(request, 'inventario.html', {'inventario': inventario})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_usuarios(request):
-    usuarios = Usuario.objects.all()
-    return render(request, 'usuarios.html', {'usuarios': usuarios})
+    if request.user.groups.filter(name='admin').exists():
+        usuarios = Usuario.objects.all()
+        return render(request, 'usuarios.html', {'usuarios': usuarios})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_clientes(request):
-    clientes = Cliente.objects.all()
-    return render(request, 'clientes.html', {'clientes': clientes})
+    if request.user.groups.filter(name='admin').exists():
+        clientes = Cliente.objects.all()
+        return render(request, 'clientes.html', {'clientes': clientes})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_ventas(request):
-    ventas = Venta.objects.all()
-    return render(request, 'ventas.html', {'ventas': ventas})
+    if request.user.groups.filter(name='admin').exists():
+        ventas = Venta.objects.all()
+        return render(request, 'ventas.html', {'ventas': ventas})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def detalles_venta(request):
-    detalles_venta = Detalles_Venta.objects.all()
-    return render(request, 'detalles_venta.html', {'detalles_venta': detalles_venta})
+    if request.user.groups.filter(name='admin').exists():
+        detalles_venta = Detalles_Venta.objects.all()
+        return render(request, 'detalles_venta.html', {'detalles_venta': detalles_venta})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_comisiones(request):
-    comisiones = Comisiones.objects.all()
-    return render(request, 'comisiones.html', {'comisiones': comisiones})
+    if request.user.groups.filter(name='admin').exists():
+        comisiones = Comisiones.objects.all()
+        return render(request, 'comisiones.html', {'comisiones': comisiones})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_departamentos(request):
-    departamentos = Departamentos.objects.all()
-    return render(request, 'departamentos.html', {'departamentos': departamentos})
+    if request.user.groups.filter(name='admin').exists():
+        departamentos = Departamentos.objects.all()
+        return render(request, 'departamentos.html', {'departamentos': departamentos})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_pagos(request):
-    pagos = Pagos.objects.all()
-    return render(request, 'pagos.html', {'pagos': pagos})
+    if request.user.groups.filter(name='admin').exists():
+        pagos = Pagos.objects.all()
+        return render(request, 'pagos.html', {'pagos': pagos})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_cotizaciones(request):
-    cotizaciones = Cotizacion.objects.all()
-    return render(request, 'cotizaciones.html', {'cotizaciones': cotizaciones})
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
+        cotizaciones = Cotizacion.objects.all()
+        return render(request, 'cotizaciones.html', {'cotizaciones': cotizaciones})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_detalles_cotizacion(request):
-    detalles = Cotizacion_Detalle.objects.all()
-    return render(request, 'cotizacion_detalle.html', {'detalles': detalles})
+    if request.user.groups.filter(name='admin').exists():
+        detalles = Cotizacion_Detalle.objects.all()
+        return render(request, 'cotizacion_detalle.html', {'detalles': detalles})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_compras_carro(request):
-    compras = Compra_Carro.objects.all()
-    return render(request, 'compras_carro.html', {'compras': compras})
-
+    if request.user.groups.filter(name='admin').exists():
+        compras = Compra_Carro.objects.all()
+        return render(request, 'compras_carro.html', {'compras': compras})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
+        
+@login_required
 def lista_compras_repuesto(request):
-    compras = Compra_Repuesto.objects.all()
-    return render(request, 'compras_repuesto.html', {'compras': compras})
+    if request.user.groups.filter(name='admin').exists():
+        compras = Compra_Repuesto.objects.all()
+        return render(request, 'compras_repuesto.html', {'compras': compras})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def lista_proveedores(request):
-    proveedores = Proveedor.objects.all()
-    return render(request, 'proveedores.html', {'proveedores': proveedores})
+    if request.user.groups.filter(name='admin').exists():
+        proveedores = Proveedor.objects.all()
+        return render(request, 'proveedores.html', {'proveedores': proveedores})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def bitacora_alertas(request):
-    alertas = Bitacora_Alertas.objects.all()
-    return render(request, 'bitacora_alertas.html', {'alertas': alertas})
+    if request.user.groups.filter(name='admin').exists():
+        alertas = Bitacora_Alertas.objects.all()
+        return render(request, 'bitacora_alertas.html', {'alertas': alertas})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def historial_cambio(request):
-    cambios = Historial_Cambio.objects.all()
-    return render(request, 'historial_cambio.html', {'cambios': cambios})
+    if request.user.groups.filter(name='admin').exists():
+        cambios = Historial_Cambio.objects.all()
+        return render(request, 'historial_cambio.html', {'cambios': cambios})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
+@login_required
 def cambios_salarios(request):
-    cambios = Cambios_Salarios.objects.all()
-    return render(request, 'cambios_salarios.html', {'cambios': cambios})
+    if request.user.groups.filter(name='admin').exists():
+        cambios = Cambios_Salarios.objects.all()
+        return render(request, 'cambios_salarios.html', {'cambios': cambios})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
