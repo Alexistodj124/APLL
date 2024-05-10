@@ -48,6 +48,6 @@ urlpatterns = [
     # path('comprador-menu/', views.comprador_menu_view, name='comprador_menu'),
     # path('carro/', views.carro_view, name='carro'),
     # path('repuesto/', views.repuesto_view, name='repuesto'),
-
+    path('logout/', views.logout_view, name='logout'),
 
 ]

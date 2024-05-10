@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Carro
 from django.shortcuts import redirect
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
@@ -39,8 +40,16 @@ def custom_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to a success page or some other URL
-            return redirect('home')  # Adjust the URL name as needed
+            # Check user's group membership
+            if user.groups.filter(name='admin').exists():
+                # Redirect admin users to a certain URL
+                return redirect('admin_menu')
+            elif user.groups.filter(name='ventas').exists():
+                # Redirect ventas users to a different URL
+                return redirect('vendedor_menu')
+            else:
+                # For users not in admin or ventas group, redirect to the home page
+                return redirect('home')
         else:
             # Return an error message if authentication fails
             messages.error(request, 'Invalid username or password.')
@@ -99,7 +108,7 @@ def menu_view(request):
     return render(request, 'menu.html')
 
 def logout_view(request):
-    LOGOUT(request)
+    logout(request)
     return redirect('login')
 
 def vendedor_menu_view(request):
