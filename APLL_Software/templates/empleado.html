@@ -17,18 +17,56 @@
             height: 50vh;
             flex-direction: column;
         }
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 0;
+            height: 100%; /* Ajusta esto al tamaño de tu logo */
+            /* width: 50px; /* Ajusta esto al tamaño de tu logo */
+        }
+
 
         .container {
-            max-width: 800px;
+            max-width: 100%;
             margin: 20px auto;
             padding: 20px;
             background-color: #3e3d3d;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .titles {
+            color: white;
+        }
+        button{
+            width: 100%;
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+        }
+        button:hover{
+            background-color: white;
+            color: black;
+        }
 
         h1 {
-            color: #ffffff;
+            color: black;
         }
 
         ul {
@@ -53,14 +91,41 @@
         .depa-id {
             font-weight: bold;
         }
+        tbody {
+            text-align: center;
+        }
     </style>
-</head>
+</head> 
 <body>
-    <h1>Lista de Empleados</h1>
-    <ul>
-        {% for empleado in empleados %}
-            <li>{{ empleado.Nombres }} {{ empleado.Apellidos }}</li>
-        {% endfor %}
-    </ul>
+    <div class="header">
+        {% load static %}
+        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+
+        <h1 class="container">Lista de Empleados</h1>
+    </div>    
+    <table>
+        <thead>
+            <tr class="">
+                <th>DPI</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Sueldo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.EmpleadoDPI }}</td>
+                    <td>{{ empleado.Nombres }}</td>
+                    <td>{{ empleado.Apellidos }}</td>
+                    <td>Q {{ empleado.Sueldo }}</td>
+                    <td><button onclick={{empleado.empleadoID}}>Editar</button></td>
+                    <td><button onclick={{empleado.empleadoID}}>Eliminar</button></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
 </body>
 </html>

@@ -23,7 +23,7 @@ class Proveedor(models.Model):
     Contacto = models.CharField(max_length=255)
 
 class Empleados(models.Model):
-    EmpleadoDPI = models.AutoField(primary_key=True)
+    EmpleadoDPI = models.IntegerField(primary_key=True)
     Nombres = models.CharField(max_length=255)
     Apellidos = models.CharField(max_length=255)
     Sueldo = models.DecimalField(max_digits=10, decimal_places=2)

@@ -123,6 +123,8 @@ def control_usuario_view(request):
     return redirect('/admin')
 
 def lista_empleados(request):
+    # new_employee = Empleados(Nombres='', Apellidos='Hernandez', Sueldo=2600.00)
+    # new_employee.save()
     empleados = Empleados.objects.all()
     return render(request, 'empleado.html', {'empleados': empleados})
 
