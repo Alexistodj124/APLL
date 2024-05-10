@@ -80,6 +80,31 @@
         </ul>
     </div>
 
+    <div class="container">
+        <h1>Informe de Ventas y Cotizaciones</h1>
+        <ul>
+            {% for venta in ventas %}
+                {% if venta.VendedorDPI == vendedor_dpi %}
+                <li>
+                    Número de Orden: <span class="numero-orden">{{ venta.Numero_Orden }}</span> - Total: <span class="total">{{ venta.Total }}</span> - Método de Pago: <span class="metodo-pago">{{ venta.MetodoPago }}</span>
+                    {% if venta.Confirmado %}
+                        - Estado: <span class="estado">Confirmado</span>
+                    {% else %}
+                        - Estado: Pendiente
+                    {% endif %}
+                </li>
+                {% endif %}
+            {% endfor %}
+            {% for cotizacion in cotizaciones %}
+                {% if cotizacion.EmpleadoDPI == vendedor_dpi %}
+                <li>
+                    Cotización ID: <span class="numero-orden">{{ cotizacion.ComisionID }}</span> - Tipo: <span class="tipo-cotizacion">{{ cotizacion.Tipo }}</span>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
     <div class="button-container">
         <a href="{% url 'lista_cotizaciones' %}"><button>Cotización anterior</button></a>
     </div>
