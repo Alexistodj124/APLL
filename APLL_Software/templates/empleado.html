@@ -96,6 +96,16 @@
         }
     </style>
 </head> 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById("editarEmpleado").onclick = function() {
+            var empleadoID = this.getAttribute("data-empleado-id");
+            window.location.href = "{% url 'editar_empleado' %}?empleado_id=" + empleadoID;
+        };
+    });
+</script>
+
+</script>
 <body>
     <div class="header">
         {% load static %}
@@ -119,7 +129,7 @@
                     <td>{{ empleado.Nombres }}</td>
                     <td>{{ empleado.Apellidos }}</td>
                     <td>Q {{ empleado.Sueldo }}</td>
-                    <td><button onclick={{empleado.empleadoID}}>Editar</button></td>
+                    <td><button id="editarEmpleado" data-empleado-id="{{ empleado.empleadoDPI }}">Editar</button></td>
                     <td><button onclick={{empleado.empleadoID}}>Eliminar</button></td>
                 </tr>
             {% endfor %}

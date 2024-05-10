@@ -337,3 +337,15 @@ def cambios_salarios(request):
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")
         return redirect('login')
+    
+@login_required
+def edit_empleado(request, empleado_id):
+    if request.user.groups.filter(name='admin').exists():
+        empleado = empleado.objects.get(id=empleado_id)
+        # Realiza las operaciones necesarias con el empleado_id, como buscar el empleado en la base de datos y mostrar un formulario de edición.
+        print(empleado)
+        return render(request, 'editar_empleado.html', {'empleado_id': [empleado_id]})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')

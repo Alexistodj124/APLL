@@ -49,5 +49,6 @@ urlpatterns = [
     # path('carro/', views.carro_view, name='carro'),
     # path('repuesto/', views.repuesto_view, name='repuesto'),
     path('logout/', views.logout_view, name='logout'),
+    path('editar/', views.edit_empleado, name='editar_empleado'),
 
 ]
