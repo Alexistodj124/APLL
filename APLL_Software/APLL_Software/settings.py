@@ -130,7 +130,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'Img',
-    BASE_DIR / 'templates',
 ]
 
 
