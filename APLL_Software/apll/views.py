@@ -210,7 +210,7 @@ def lista_clientes(request):
 
 @login_required
 def lista_ventas(request):
-    if request.user.groups.filter(name='admin').exists():
+    if request.user.groups.filter(name__in =['admin','ventas']).exists():
         ventas = Venta.objects.all()
         return render(request, 'ventas.html', {'ventas': ventas})
     else:
