@@ -63,5 +63,10 @@
     <div class="button-container">
         <a href="{% url 'lista_empleados' %}"><button>Informe Vendedor</button></a>
     </div>
+    {% if meta_alcanzada %}
+        <div class="meta-alcance">
+            ¡Felicidades! Has alcanzado la meta de comisiones. Total de comisiones: {{ total_comisiones }}
+        </div>
+    {% endif %}
 </body>
 </html>
