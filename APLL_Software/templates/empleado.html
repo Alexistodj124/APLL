@@ -101,11 +101,16 @@
 </head> 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById("editarEmpleado").onclick = function() {
-            var empleadoID = this.getAttribute("data-empleado-id");
-            window.location.href = "{% url 'editar_empleado' %}?empleado_id=" + empleadoID;
-        };
+        var editarEmpleadoButtons = document.querySelectorAll(".editarEmpleado");
+        editarEmpleadoButtons.forEach(function(button) {
+            button.onclick = function() {
+                var empleadoDPI = this.getAttribute("data-empleado-id");
+                alert('Desea editar el usuario: ' + empleadoDPI);
+                window.location.href = "{% url 'editar_empleado' 0 %}".replace('0', empleadoDPI);
+            };
+        });
     });
+
 </script>
 
 </script>
@@ -131,7 +136,7 @@
                     <td>{{ empleado.Nombres }}</td>
                     <td>{{ empleado.Apellidos }}</td>
                     <td>Q {{ empleado.Sueldo }}</td>
-                    <td><button id="editarEmpleado" data-empleado-id="{{ empleado.empleadoDPI }}">Editar</button></td>
+                    <td><button class="editarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Editar</button></td>
                     <td><button onclick={{empleado.empleadoID}}>Eliminar</button></td>
                 </tr>
             {% endfor %}

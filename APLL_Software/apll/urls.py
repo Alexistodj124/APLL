@@ -2,7 +2,8 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
 urlpatterns = [
-    path('', views.filter_carros, name='home'),
+    path('', views.custom_login, name='home'),
+    # path('', views.filter_carros, name='home'),
     path('accounts/login/', views.custom_login, name='login'),
     path('pruebarepuestos',views.filter_carros, name='pruebarepuestos'),
     # path('login/', views.login_view, name='login'),
@@ -49,6 +50,6 @@ urlpatterns = [
     # path('carro/', views.carro_view, name='carro'),
     # path('repuesto/', views.repuesto_view, name='repuesto'),
     path('logout/', views.logout_view, name='logout'),
-    path('editar/', views.edit_empleado, name='editar_empleado'),
+    path('editar_empleado/<int:empleadoDPI>/', views.edit_empleado, name='editar_empleado'),
 
 ]

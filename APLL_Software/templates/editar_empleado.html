@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagos</title>
     <style>
         body {
-            background-image: url('../Img/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg" %}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -19,13 +20,11 @@
         }
 
         .container {
-            max-width: 90%;
+            max-width: 100%;
             margin: 20px auto;
             padding: 20px;
-            background-image: url('../Img/fondo2.jpg');
-            background-size: cover; 
-            background-position: center;
-            border-radius: 20px;
+            background-color: #3e3d3d;
+            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
@@ -59,13 +58,35 @@
 </head>
 <body>
     <div class="container">
-        <h1>Editar Empleado</h1>
-        <h4>{{empleado_id[0]}}</h4>
-        <ul>
-            <li>Nombre del Empleado: {{ empleado_id }}</li>
-            <li>DPI del Empleado: {{ empleado.dpi }}</li>
-            <!-- Otros detalles del empleado que desees desplegar -->
-        </ul>
+        <h1>Datos Actuales</h1>
+        <tbody>
+            {% for e in empleado %}
+                <ul>
+                    <li>DPI: {{ e.EmpleadoDPI }}</li>
+                    <li>Nombres: {{ e.Nombres }}</li>
+                    <li>Apellidos: {{ e.Apellidos }}</li>
+                    <li>Sueldo: {{ e.Sueldo }}</li>
+                    <!-- Otros detalles del empleado que desees desplegar -->
+                </ul>
+            {% endfor %}
+        </tbody>
     </div>
+    <div class="container">
+        <h1>Editar</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for e in empleado %}
+                <ul>
+                    <li>DPI: <input type="text" name="dpi" value="{{ e.EmpleadoDPI }}"></li>
+                    <li>Nombres: <input type="text" name="nombres" value="{{ e.Nombres }}"></li>
+                    <li>Apellidos: <input type="text" name="apellidos" value="{{ e.Apellidos }}"></li>
+                    <li>Sueldo: <input type="text" name="sueldo" value="{{ e.Sueldo }}"></li>
+                    <!-- Otros detalles del empleado que desees editar -->
+                </ul>
+            {% endfor %}
+            <input type="submit" value="Guardar cambios">
+        </form>
+    </div>
+    
 </body>
 </html>
