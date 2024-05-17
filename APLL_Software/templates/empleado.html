@@ -109,6 +109,14 @@
                 window.location.href = "{% url 'empleadoCUD2' 0 %}".replace('0', empleadoDPI);
             };
         });
+        var editarEmpleadoButtons = document.querySelectorAll(".eliminarEmpleado");
+        editarEmpleadoButtons.forEach(function(button) {
+            button.onclick = function() {
+                var empleadoDPI = this.getAttribute("data-empleado-id");
+                alert('Desea Eliminar el usuario: ' + empleadoDPI);
+                window.location.href = "{% url 'empleadoCUD3' 0 %}".replace('0', empleadoDPI);
+            };
+        });
     });
 
 </script>

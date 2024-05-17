@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class=''>
+    <div class="" style="margin-left: 250px; border: 1px; border-radius: 10px ; padding: 10px;">
+        <h1 class="bg-primary">Are you shure you want to delete..?</h1>
+        <form method="post" style="align-items:center;">
+            {%csrf_token%}
+            <button type="submit" class="btn btn-danger"> Confirm </button>
+            <a href="/" class="btn btn-success"> Back</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

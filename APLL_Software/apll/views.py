@@ -378,3 +378,9 @@ def EditUser(request,id=None):
     mydict= {'form':form}
     return render(request,'editar_empleado.html',context=mydict)
 
+def DeleteUser(request,eid=None):
+    one_rec = Empleados.objects.get(pk=eid)
+    if  request.method=="POST":
+         one_rec.delete()
+         return redirect('/empleados')
+    return render(request,'Delete.html')
