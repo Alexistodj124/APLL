@@ -54,37 +54,40 @@
         .metodopago-id {
             font-weight: bold;
         }
+        button{
+            width: 100%;
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            font-size: 90%;
+        }
+        button:hover{
+            background-color: white;
+            color: black;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Datos Actuales</h1>
-        <tbody>
-            {% for e in empleado %}
-                <ul>
-                    <li>DPI: {{ e.EmpleadoDPI }}</li>
-                    <li>Nombres: {{ e.Nombres }}</li>
-                    <li>Apellidos: {{ e.Apellidos }}</li>
-                    <li>Sueldo: {{ e.Sueldo }}</li>
-                    <!-- Otros detalles del empleado que desees desplegar -->
-                </ul>
-            {% endfor %}
-        </tbody>
-    </div>
-    <div class="container">
-        <h1>Editar</h1>
-        <form method="post">
+        <h1> <center>Editar</center></h1>
+        <!-- <form method="post" >
             {% csrf_token %}
+            {{ form.as_p }}
             {% for e in empleado %}
                 <ul>
-                    <li>DPI: <input type="text" name="dpi" value="{{ e.EmpleadoDPI }}"></li>
+                    <li>DPI: <input type="text" name="dpi" value="{{ e.EmpleadoDPI }}" id="dpi"></li>
                     <li>Nombres: <input type="text" name="nombres" value="{{ e.Nombres }}"></li>
                     <li>Apellidos: <input type="text" name="apellidos" value="{{ e.Apellidos }}"></li>
                     <li>Sueldo: <input type="text" name="sueldo" value="{{ e.Sueldo }}"></li>
-                    <!-- Otros detalles del empleado que desees editar -->
+                    <li>{{dpi}}</li>
+                    <td><button class="editarEmpleado" data-empleado="{{ dpi }}">Enviar Nuevos Datos</button></td>
                 </ul>
             {% endfor %}
-            <input type="submit" value="Guardar cambios">
+        </form> -->
+        <form method="post" enctype="multipart/form-data">
+            {{form.as_p}}
+            <button type="submit" class="btn btn-primary">Update User</button>
+            {% csrf_token %}
         </form>
     </div>
     

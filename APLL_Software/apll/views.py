@@ -1,8 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render
 from .models import Carro
 from django.shortcuts import redirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
@@ -28,6 +27,8 @@ from .models import Proveedor
 from .models import Bitacora_Alertas
 from .models import Historial_Cambio
 from .models import Cambios_Salarios
+from .forms import EmpleadoForm
+from .forms import UserForm
 
 # Create your views here.
 
@@ -349,3 +350,31 @@ def edit_empleado(request, empleadoDPI):
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")
         return redirect('login')
+    
+
+@login_required
+def empleadoCUD(request, empleadoDPI):
+    if request.user.groups.filter(name='admin').exists():
+        instance = get_object_or_404(Empleados, pk=empleadoDPI)
+        if request.method == 'POST':
+            form = EmpleadoForm(request.POST, instance=instance)
+            if form.is_valid():
+                form.save()
+                return redirect('my_model_list')
+        else:
+            form = EmpleadoForm(instance=instance)
+        return render(request, 'my_model_form.html', {'form': form})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
+    
+def EditUser(request,id=None):
+    one_rec=Empleados.objects.get(pk=id)
+    form=UserForm(request.POST or None,request.FILES or None, instance=one_rec)
+    if form.is_valid():
+        form.save()
+        return redirect('/empleados')
+    mydict= {'form':form}
+    return render(request,'editar_empleado.html',context=mydict)
+

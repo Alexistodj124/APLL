@@ -50,6 +50,9 @@ urlpatterns = [
     # path('carro/', views.carro_view, name='carro'),
     # path('repuesto/', views.repuesto_view, name='repuesto'),
     path('logout/', views.logout_view, name='logout'),
-    path('editar_empleado/<int:empleadoDPI>/', views.edit_empleado, name='editar_empleado'),
+    #path('editar_empleado/<int:empleadoDPI>/', views.edit_empleado, name='editar_empleado'),
+    path('editar_empleado/<int:empleadoDPI>/', views.empleadoCUD, name='empleadoCUD'),
+    path('Edit/<id>', views.EditUser, name='empleadoCUD2'),
+    path('Delete/<eid>', views.DeleteUser, name='empleadoCUD3'),
 
 ]
