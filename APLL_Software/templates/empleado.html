@@ -21,7 +21,7 @@
         }
 
         .header {
-            width: 100%;
+            width: 90%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,7 +32,7 @@
             position: absolute;
             left: 0;
             height: 100%; /* Ajusta esto al tamaño de tu logo */
-            /* width: 50px; /* Ajusta esto al tamaño de tu logo */
+            /* \]width: 50px; /* Ajusta esto al tamaño de tu logo */
         }
 
 
@@ -124,8 +124,10 @@
 </script>
 <body>
     <div class="header">
-        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
-
+        <a href="{% url 'admin_menu' %}">
+            <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
+        </a>
+        
         <h1 class="container">Lista de Empleados</h1>
     </div>    
     <table>
