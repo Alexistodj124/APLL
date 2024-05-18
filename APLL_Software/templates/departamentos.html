@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    {% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Departamentos</title>
     <style>
         body {
-            background-image: url('../Img/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg"%}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -22,7 +23,7 @@
             max-width: 90%;
             margin: 20px auto;
             padding: 20px;
-            background-image: url('../Img/fondo2.jpg');
+            background-image: url('{% static "fondo2.jpg"%}');
             background-size: cover; 
             background-position: center;
             border-radius: 20px;
