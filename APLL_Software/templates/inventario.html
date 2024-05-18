@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
+{% extends 'base.html'%} {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
     <style>
         body {
-            background-image: url('../Imagenes/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg"%}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -22,7 +25,7 @@
             max-width: 90%;
             margin: 20px auto;
             padding: 20px;
-            background-image: url('../Imagenes/fondo2.jpg');
+            background-image: url('{% static "fondo2.jpg"%}');
             background-size: cover; 
             background-position: center;
             border-radius: 20px;
@@ -80,23 +83,23 @@
             color: #ffffff;
             text-align: left;
         }
-    /*Estilo Formularios*/
-    .container-inv{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .car-form{
-        display: flex;
-        flex-direction: column;
-    }
-    .container-results{
-        margin-left: 50px;
-    }
-    .container-results ul{
-        background-color: #eaeaea;
-        color: black;
-    }
+        /*Estilo Formularios*/
+        .container-inv{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .car-form{
+            display: flex;
+            flex-direction: column;
+        }
+        .container-results{
+            margin-left: 50px;
+        }
+        .container-results ul{
+            background-color: #eaeaea;
+            color: black;
+        }
 
     </style>
 </head>
@@ -105,10 +108,8 @@
         <div class= "form-container"> 
             <a href="./agregar_repuesto.html"><button>Agregar Repuesto</button></a>
         </div>
-</body>
-<body>
+
     <h1>Buscador de Inventario</h1>
-    {% extends 'base.html'%}
 
     {% block content %}
     <div class="container-inv">
@@ -151,8 +152,6 @@
         </div>
         {% endblock %}
     </div>
-</body>
-<body>
 
         <table>
             <thead>
