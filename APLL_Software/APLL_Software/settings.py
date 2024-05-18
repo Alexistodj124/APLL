@@ -81,11 +81,19 @@ DATABASES = {
         'NAME': 'aplldb',
         #Server User:
         #'USER': 'alexis',
+
         #Local User:
         'USER': 'postgres',
         'PASSWORD': 'Alexis2012',
         'HOST': 'localhost',
         'PORT': '5432',
+
+        #Derek db setup
+        #'USER': 'postgres',
+        #'PASSWORD': 'database1103',
+        #'HOST': 'localhost',
+        #'PORT': '5432',
+
     }
 }
 
