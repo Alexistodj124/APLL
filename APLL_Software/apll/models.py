@@ -1,6 +1,7 @@
+from django.utils import timezone
 from django.db import models
 
-from django.db import models
+
 
 
 class Cliente(models.Model):
@@ -33,7 +34,7 @@ class Venta(models.Model):
     Nombre_Cliente = models.CharField(max_length=255)
     NIT = models.IntegerField()
     Total = models.DecimalField(max_digits=10, decimal_places=2)
-    Fecha = models.DateTimeField(auto_now_add=True)
+    Fecha = models.DateTimeField(default=timezone.now)
     empleado = models.ForeignKey(Empleados, on_delete=models.CASCADE, related_name='venta')
 
 class Departamentos(models.Model):

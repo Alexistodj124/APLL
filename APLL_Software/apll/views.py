@@ -148,7 +148,7 @@ def control_usuario_view(request):
 
 @login_required
 def lista_empleados(request):
-    # new_employee = Empleados(Nombres='', Apellidos='Hernandez', Sueldo=2600.00)
+    # new_employee = Empleados(EmpleadoDPI= 1234 ,Nombres='Alex', Apellidos='Gonzalez', Sueldo=4250.00)
     # new_employee.save()
     
     if request.user.groups.filter(name='admin').exists():
@@ -251,6 +251,21 @@ def lista_departamentos(request):
 
 @login_required
 def lista_pagos(request):
+    # Create a new Venta instance
+    venta = Venta.objects.create(
+        Nombre_Cliente='Silvino',
+        NIT = 112341234,
+        Total = 1500.00,
+        empleado = Empleados.objects.get(EmpleadoDPI=1234),
+    )
+    pago = Pagos.objects.create(
+        MetodoPago='Efectivo',
+        Monto = 500.00,
+        venta=Venta.objects.get(Numero_Orden=1)
+    )
+    # The Fecha field will automatically be set to the current date and time
+    print(venta.Fecha)  # Outputs the current datetime when the instance was created
+
     if request.user.groups.filter(name='admin').exists():
         pagos = Pagos.objects.all()
         return render(request, 'pagos.html', {'pagos': pagos})
