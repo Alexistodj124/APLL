@@ -40,6 +40,16 @@
             color: #ffffff;
         }
 
+        table {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
         li {
             margin-bottom: 10px;
             padding: 10px;
@@ -56,18 +66,39 @@
         .metodopago-id {
             font-weight: bold;
         }
+        tbody {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Pagos</h1>
-        <ul>
-            {% for pago in pagos %}
-                <li>
-                    ID del Método de Pago: <span class="metodopago-id">{{ pago.MetodoPagoID }}</span> - Método de Pago: {{ pago.MetodoPago }} - Usuario: {{ pago.Usuario }} - DPI del Empleado: {{ pago.EmpleadoDPI }}
-                </li>
-            {% endfor %}
-        </ul>
     </div>
+    <table>
+        <thead>
+            <tr class="">
+                <th>Fecha</th>
+                <th>Numero de Orden</th>
+                <th>Metodo de Pago</th>
+                <th>Monto</th>
+                <th>Vendedor</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for pago in pagos %}
+                <tr>
+                    <td>{{ pago.venta.Fecha }}</td>
+                    <td>{{ pago.venta.Numero_Orden }}</td>
+                    <td>{{ pago.MetodoPago }}</td>
+                    <td>{{ pago.Monto }}</td>
+                    <!-- <td><button class="editarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Editar</button></td>
+                    <td><button class="eliminarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Eliminar</button></td> -->
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
 </body>
 </html>

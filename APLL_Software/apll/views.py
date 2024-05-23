@@ -251,20 +251,17 @@ def lista_departamentos(request):
 
 @login_required
 def lista_pagos(request):
-    # Create a new Venta instance
-    venta = Venta.objects.create(
-        Nombre_Cliente='Silvino',
-        NIT = 112341234,
-        Total = 1500.00,
-        empleado = Empleados.objects.get(EmpleadoDPI=1234),
-    )
-    pago = Pagos.objects.create(
-        MetodoPago='Efectivo',
-        Monto = 500.00,
-        venta=Venta.objects.get(Numero_Orden=1)
-    )
-    # The Fecha field will automatically be set to the current date and time
-    print(venta.Fecha)  # Outputs the current datetime when the instance was created
+    # venta = Venta.objects.create(
+    #     Nombre_Cliente='Silvino',
+    #     NIT = 112341234,
+    #     Total = 1500.00,
+    #     empleado = Empleados.objects.get(EmpleadoDPI=1234),
+    # )
+    # pago = Pagos.objects.create(
+    #     MetodoPago='Efectivo',
+    #     Monto = 500.00,
+    #     venta=Venta.objects.get(Numero_Orden=1)
+    # )
 
     if request.user.groups.filter(name='admin').exists():
         pagos = Pagos.objects.all()
