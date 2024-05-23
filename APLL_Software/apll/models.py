@@ -30,13 +30,11 @@ class Empleados(models.Model):
 
 class Venta(models.Model):
     Numero_Orden = models.AutoField(primary_key=True)
-    CajaDPI = models.IntegerField()
-    BodegaDPI = models.IntegerField()
+    Nombre_Cliente = models.CharField(max_length=255)
     NIT = models.IntegerField()
     Total = models.DecimalField(max_digits=10, decimal_places=2)
-    MetodoPago = models.CharField(max_length=50)
-    Fecha = models.DateTimeField()
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    Fecha = models.DateTimeField(auto_now_add=True)
+    empleado = models.ForeignKey(Empleados, on_delete=models.CASCADE, related_name='venta')
 
 class Departamentos(models.Model):
     DepaID = models.AutoField(primary_key=True)
@@ -83,11 +81,10 @@ class Inventario(models.Model):
     repuesto = models.ForeignKey(Repuestos, on_delete=models.CASCADE)
 
 class Pagos(models.Model):
-    MetodoPagoID = models.AutoField(primary_key=True)
+    PagoID = models.AutoField(primary_key=True)
     MetodoPago = models.CharField(max_length=50)
-    Usuario = models.CharField(max_length=50)
-    EmpleadoDPI = models.IntegerField()
-    empleado = models.ForeignKey(Empleados, on_delete=models.CASCADE)
+    Monto = models.DecimalField(max_digits=10, decimal_places=2)
+    venta = models.ForeignKey(Venta, on_delete=models.CASCADE, related_name='pagos')
 
 class Comisiones(models.Model):
     ComisionID = models.AutoField(primary_key=True)
