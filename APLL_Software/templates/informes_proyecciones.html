@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <style>
+        body {
+            background-image: url('../Imagenes/fondo1.jpg');
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-image: url('../Imagenes/fondo2.jpg');
+            background-size: cover; 
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ffffff;
+            color: #ffffff;
+        }
+
+
+
+        .form-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffffff;
+        }
+
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #3e3d3d;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #3e3d3d;
+        }
+
+        h2 {
+            color: #ffffff;
+            text-align: left;
+        }
+        /*Estilo Formularios*/
+        .container-inv{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .car-form{
+            display: flex;
+            flex-direction: column;
+        }
+        .container-results{
+            margin-left: 50px;
+        }
+        .container-results ul{
+            background-color: #eaeaea;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Informes y proyecciones financieras</h1>
+    <div class="container">
+        <h2>Resultados del período</h2>
+        <ul>
+            {% for venta in ventas %}
+                {% if venta.VendedorDPI == vendedor_dpi %}
+                    <li>
+                        Resultados por empleado
+                        
+
+                    </li>
+                {%endif%}
+            {%endfor%}
+        </ul>
+        <script>
+            
+        </script>
+
+    </div>
+</body>
+</html>
