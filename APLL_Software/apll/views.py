@@ -211,10 +211,20 @@ def lista_clientes(request):
         return redirect('login')
 
 @login_required
-def lista_ventas(request):
+def lista_ventas(request, anio=None, mes=None):
     if request.user.groups.filter(name__in =['admin','ventas']).exists():
         ventas = Venta.objects.all()
-        return render(request, 'ventas.html', {'ventas': ventas})
+        ventas_filtradas = []
+        for venta in ventas:
+            fecha = str(venta.Fecha)
+            fecha_dt = datetime.fromisoformat(fecha)
+            mes1 = str(fecha_dt.month)
+            anio1 = str(fecha_dt.year)
+            if anio1 == anio:
+                if mes1 == mes:
+                    ventas_filtradas.append(venta)
+        print(ventas_filtradas)
+        return render(request, 'ventas.html', {'ventas': ventas_filtradas})
     else:
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")
