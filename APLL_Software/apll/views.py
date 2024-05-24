@@ -229,6 +229,19 @@ def lista_ventas(request, anio=None, mes=None):
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")
         return redirect('login')
+    
+@login_required
+def filtro_ventas(request):
+    if request.user.groups.filter(name='admin').exists():
+        if 'month' in request.GET:
+            mes_anio = request.GET['month']
+            anio1, mes1 = map(int, mes_anio.split('-'))
+            return redirect('lista_ventas', anio=anio1, mes=mes1)
+        return render(request, 'filtro_ventas.html')
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
 
 @login_required
 def detalles_venta(request):
