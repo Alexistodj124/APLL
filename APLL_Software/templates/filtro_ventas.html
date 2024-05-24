@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos</title>
+    <style>
+        body {
+            background-image: url('{% static "fondo1.jpg" %}');
+            background-size: cover; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-image: url('{% static "fondo2.jpg" %}');
+            background-size: cover; 
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            margin-left: 10%;
+            margin-right: 10%;
+            background-color: #3e3d3d;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #000000;
+        }
+
+        li:hover {
+            background-color: #eaeaea;
+        }
+        
+        .metodopago-id {
+            font-weight: bold;
+        }
+        tbody {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Filtrar Ventas Por Mes</h1>
+    </div>
+    <div>
+        <form method="GET" action="{% url 'filtro_ventas' %}" >
+            <input type="month" id="month" name="month" required>
+            <button type="submit">Submit</button>
+        </form>        
+    </div>
+</body>
+</html>
