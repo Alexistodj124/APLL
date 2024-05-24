@@ -224,7 +224,7 @@ def lista_ventas(request, anio=None, mes=None):
                 if mes1 == mes:
                     ventas_filtradas.append(venta)
         print(ventas_filtradas)
-        return render(request, 'ventas.html', {'ventas': ventas_filtradas})
+        return render(request, 'lista_ventas.html', {'ventas': ventas_filtradas})
     else:
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")
