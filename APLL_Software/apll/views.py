@@ -285,8 +285,11 @@ def lista_pagos(request, anio=None, mes=None):
 @login_required
 def filtro_pagos(request):
     if request.user.groups.filter(name='admin').exists():
-        pagos = Pagos.objects.all()
-        return render(request, 'pagos.html', {'pagos': pagos})
+        if 'mes' in request.GET:
+            mes_anio = request.GET['month']
+            anio1, mes1 = map(int, mes_anio.split('-'))
+            return redirect('lista_pagos', anio=anio1, mes=mes1)
+        return render(request, 'filtro_pagos.html')
     else:
         # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
         messages.error(request, "No tienes permiso para acceder a esta página.")

@@ -73,31 +73,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Pagos</h1>
+        <h1>Filtrar Pagos Por Mes</h1>
     </div>
-    <table>
-        <thead>
-            <tr class="">
-                <th>Fecha</th>
-                <th>Numero de Orden</th>
-                <th>Metodo de Pago</th>
-                <th>Monto</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for pago in pagos %}
-                <tr>
-                    <td>{{ pago.venta.Fecha }}</td>
-                    <td>{{ pago.venta.Numero_Orden }}</td>
-                    <td>{{ pago.MetodoPago }}</td>
-                    <td>{{ pago.Monto }}</td>
-                    <!-- <td><button class="editarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Editar</button></td>
-                    <td><button class="eliminarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Eliminar</button></td> -->
-                </tr>
-            {% endfor %}
-        </tbody>
-        
-    </table>
+    <div>
+        <form method="GET" action="{% url 'filtro_pagos' %}" >
+            <input type="month" id="month" name="month" required>
+            <button type="submit">Submit</button>
+        </form>        
+    </div>
 </body>
 </html>
