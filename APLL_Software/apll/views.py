@@ -285,7 +285,7 @@ def lista_pagos(request, anio=None, mes=None):
 @login_required
 def filtro_pagos(request):
     if request.user.groups.filter(name='admin').exists():
-        if 'mes' in request.GET:
+        if 'month' in request.GET:
             mes_anio = request.GET['month']
             anio1, mes1 = map(int, mes_anio.split('-'))
             return redirect('lista_pagos', anio=anio1, mes=mes1)
