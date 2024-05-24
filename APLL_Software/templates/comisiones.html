@@ -31,42 +31,79 @@
         h1 {
             color: #ffffff;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            color: #ffffff;
-
-        }
-        li {
-            margin-bottom: 10px;
+        .filters {
+            margin-bottom: 20px;
             padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             color: #000000;
-
         }
-        li:hover {
+        .filters label, .filters input, .filters select {
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dddddd;
+        }
+        th {
+            background-color: #4c271c;
+            color: #ffffff;
+        }
+        tr:hover {
             background-color: #eaeaea;
-        }
-        .comision-id {
-            font-weight: bold;
-        }
-        .tipo {
-            color: #007bff;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Comisiones</h1>
-        <ul>
-            {% for comision in comisiones %}
-                <li>
-                    ID de Comisión: <span class="comision-id">{{ comision.ComisionID }}</span> - Tipo: <span class="tipo">{{ comision.Tipo }}</span>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="filters">
+            <form method="get" action="">
+                <label for="vendedor">Vendedor:</label>
+                <select name="vendedor" id="vendedor">
+                    <option value="">Todos</option>
+                    {% for vendedor in vendedores %}
+                        <option value="{{ vendedor.id }}" {% if vendedor.id == selected_vendedor %}selected{% endif %}>{{ vendedor.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label for="fecha_inicio">Fecha Inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ selected_fecha_inicio }}">
+                <label for="fecha_fin">Fecha Fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" value="{{ selected_fecha_fin }}">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID de Comisión</th>
+                    <th>Tipo</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comision in comisiones %}
+                    <tr>
+                        <td>{{ comision.ComisionID }}</td>
+                        <td>{{ comision.Tipo }}</td>
+                        <td>{{ comision.Monto }}</td>
+                        <td>{{ comision.Fecha }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
+
