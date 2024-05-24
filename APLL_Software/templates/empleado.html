@@ -8,7 +8,7 @@
     <title>Lista de Empleados</title>
     <style>
         body {
-            background-image: url('{% static "fondo1.jpg" %}');
+            background-image: url('../Img/fondo1.jpg');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -20,138 +20,100 @@
             flex-direction: column;
         }
 
-        .header {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .logo {
-            position: absolute;
-            left: 0;
-            height: 100%; /* Ajusta esto al tamaño de tu logo */
-            /* width: 50px; /* Ajusta esto al tamaño de tu logo */
-        }
-
-
         .container {
-            max-width: 100%;
+            max-width: 90%;
             margin: 20px auto;
             padding: 20px;
-            background-color: #3e3d3d;
-            border-radius: 8px;
+            background-color: #B58D82;
+            background-size: cover; 
+            background-position: center;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 80%;
-            margin: 20px auto;
-            padding: 20px;
-            margin-left: 10%;
-            margin-right: 10%;
-            background-color: #3e3d3d;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .titles {
-            color: white;
-        }
-        button{
-            width: 100%;
-            background-color: black;
-            color: white;
-            border-radius: 8px;
-        }
-        button:hover{
-            background-color: white;
-            color: black;
         }
 
         h1 {
-            color: black;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
             color: #ffffff;
         }
 
-        li {
-            margin-bottom: 10px;
+        .filters {
+            margin-bottom: 20px;
             padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             color: #000000;
         }
 
-        li:hover {
-            background-color: #eaeaea;
+        .filters label, .filters input {
+            margin-right: 10px;
         }
-        
-        .depa-id {
-            font-weight: bold;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        tbody {
-            text-align: center;
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #4c271c;
+            color: #ffffff;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        tbody tr:last-of-type {
+            border-bottom: 2px solid #4c271c;
         }
     </style>
-</head> 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var editarEmpleadoButtons = document.querySelectorAll(".editarEmpleado");
-        editarEmpleadoButtons.forEach(function(button) {
-            button.onclick = function() {
-                var empleadoDPI = this.getAttribute("data-empleado-id");
-                alert('Desea editar el usuario: ' + empleadoDPI);
-                window.location.href = "{% url 'empleadoCUD2' 0 %}".replace('0', empleadoDPI);
-            };
-        });
-        var editarEmpleadoButtons = document.querySelectorAll(".eliminarEmpleado");
-        editarEmpleadoButtons.forEach(function(button) {
-            button.onclick = function() {
-                var empleadoDPI = this.getAttribute("data-empleado-id");
-                alert('Desea Eliminar el usuario: ' + empleadoDPI);
-                window.location.href = "{% url 'empleadoCUD3' 0 %}".replace('0', empleadoDPI);
-            };
-        });
-    });
-
-</script>
-
-</script>
+</head>
 <body>
-    <div class="header">
-        <img src="{% static 'logo.png' %}" alt="Logo" class="logo">
-
-        <h1 class="container">Lista de Empleados</h1>
-    </div>    
-    <table>
-        <thead>
-            <tr class="">
-                <th>DPI</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Sueldo</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-            {% for empleado in empleados %}
+    <div class="container">
+        <h1>Lista de Empleados</h1>
+        <div class="filters">
+            <form method="get" action="">
+                <label for="fecha_inicio">Fecha Inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ selected_fecha_inicio }}">
+                <label for="fecha_fin">Fecha Fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" value="{{ selected_fecha_fin }}">
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ empleado.EmpleadoDPI }}</td>
-                    <td>{{ empleado.Nombres }}</td>
-                    <td>{{ empleado.Apellidos }}</td>
-                    <td>Q {{ empleado.Sueldo }}</td>
-                    <td><button class="editarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Editar</button></td>
-                    <td><button class="eliminarEmpleado" data-empleado-id="{{ empleado.EmpleadoDPI }}">Eliminar</button></td>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Departamento</th>
+                    <th>Fecha de Ingreso</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-        
-    </table>
-
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                    <tr>
+                        <td>{{ empleado.Nombres }}</td>
+                        <td>{{ empleado.Apellidos }}</td>
+                        <td>{{ empleado.departamento.Nombre }}</td>
+                        <td>{{ empleado.fecha_ingreso }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+
+
