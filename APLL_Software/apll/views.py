@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.http import HttpResponse
 from .models import Carro
 from django.shortcuts import redirect
@@ -250,7 +251,7 @@ def lista_departamentos(request):
         return redirect('login')
 
 @login_required
-def lista_pagos(request):
+def lista_pagos(request, anio=None, mes=None):
     # venta = Venta.objects.create(
     #     Nombre_Cliente='Silvino',
     #     NIT = 112341234,
@@ -258,11 +259,31 @@ def lista_pagos(request):
     #     empleado = Empleados.objects.get(EmpleadoDPI=1234),
     # )
     # pago = Pagos.objects.create(
-    #     MetodoPago='Efectivo',
+    #     MetodoPago='Tarjeta',
     #     Monto = 500.00,
     #     venta=Venta.objects.get(Numero_Orden=1)
     # )
 
+    if request.user.groups.filter(name='admin').exists():
+        pagos = Pagos.objects.all()
+        pagos_filtrados = []
+        for pago in pagos:
+            fecha = str(pago.venta.Fecha)
+            fecha_dt = datetime.fromisoformat(fecha)
+            mes1 = str(fecha_dt.month)
+            anio1 = str(fecha_dt.year)
+            if anio1 == anio:
+                if mes1 == mes:
+                    pagos_filtrados.append(pago)
+        print(pagos_filtrados)
+        return render(request, 'pagos.html', {'pagos': pagos_filtrados})
+    else:
+        # El usuario no pertenece al grupo, redirigir o mostrar un mensaje de error
+        messages.error(request, "No tienes permiso para acceder a esta página.")
+        return redirect('login')
+    
+@login_required
+def filtro_pagos(request):
     if request.user.groups.filter(name='admin').exists():
         pagos = Pagos.objects.all()
         return render(request, 'pagos.html', {'pagos': pagos})
