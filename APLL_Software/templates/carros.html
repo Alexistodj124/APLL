@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    {%load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Carros</title>
     <style>
         body {
-            background-image: url('../Img/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg" %}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -22,7 +23,7 @@
             max-width: 90%;
             margin: 20px auto;
             padding: 20px;
-            background-image: url('../Img/fondo2.jpg');
+            background-image: url('{% static "fondo2.jpg" %}');
             background-size: cover; 
             background-position: center;
             border-radius: 20px;
@@ -31,51 +32,35 @@
 
         h1 {
             color: #ffffff;
-            text-align: center;
+        }
+        th{
+            color: #ffffff
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border: 1px solid #ffffff;
+        ul {
+            list-style-type: none;
+            padding: 0;
             color: #ffffff;
         }
 
-        tr:hover {
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+        }
+
+        li:hover {
             background-color: #eaeaea;
         }
-
-        .marca {
+        
+        .cotizaciondetalle-id {
             font-weight: bold;
         }
-
-        .transmision {
-            color: #777;
-        }
-
-        label {
+        label{
             color: #ffffff;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="submit"] {
-            width: calc(100% - 20px); 
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
-        @media screen and (min-width: 768px) {
-            .container {
-                max-width: 800px;
-            }
         }
     </style>
 </head>

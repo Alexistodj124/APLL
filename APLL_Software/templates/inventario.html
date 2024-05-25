@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+    {%load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
     <style>
         body {
-            background-image: url('../Imagenes/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg" %}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -22,7 +23,7 @@
             max-width: 90%;
             margin: 20px auto;
             padding: 20px;
-            background-image: url('../Imagenes/fondo2.jpg');
+            background-image: url('{% static "fondo2.jpg" %}');
             background-size: cover; 
             background-position: center;
             border-radius: 20px;
@@ -31,73 +32,30 @@
 
         h1 {
             color: #ffffff;
-            text-align: center;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ffffff;
+        ul {
+            list-style-type: none;
+            padding: 0;
             color: #ffffff;
         }
 
-
-
-        .form-container {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-container input[type="text"] {
-            width: 100%;
-            padding: 8px;
+        li {
             margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ffffff;
-        }
-
-        .form-container input[type="submit"] {
-            width: 100%;
             padding: 10px;
-            background-color: #3e3d3d;
-            color: #ffffff;
-            border: none;
+            background-color: #f9f9f9;
             border-radius: 5px;
-            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            color: #000000;
         }
 
-        .form-container input[type="submit"]:hover {
-            background-color: #3e3d3d;
+        li:hover {
+            background-color: #eaeaea;
         }
-
-        h2 {
-            color: #ffffff;
-            text-align: left;
+        
+        .cotizaciondetalle-id {
+            font-weight: bold;
         }
-    /*Estilo Formularios*/
-    .container-inv{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-    .car-form{
-        display: flex;
-        flex-direction: column;
-    }
-    .container-results{
-        margin-left: 50px;
-    }
-    .container-results ul{
-        background-color: #eaeaea;
-        color: black;
-    }
-
     </style>
 </head>
 <body>
@@ -108,8 +66,6 @@
 </body>
 <body>
     <h1>Buscador de Inventario</h1>
-    {% extends 'base.html'%}
-
     {% block content %}
     <div class="container-inv">
         <form method="get" action="">

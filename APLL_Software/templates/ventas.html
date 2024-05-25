@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    {%load static%}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Ventas</title>
     <style>
         body {
-            background-image: url('../Imagenes/fondo1.jpg');
+            background-image: url('{% static "fondo1.jpg" %}');
             background-size: cover; 
             font-family: Arial, sans-serif;
             margin: 0;
@@ -21,8 +22,8 @@
         .container {
             max-width: 90%;
             margin: 20px auto;
-            padding: 20px;
-            background-image: url('../Imagenes/fondo2.jpg');
+            padding: 10px;
+            background-image: url('{% static "fondo1.jpg" %}');
             background-size: cover; 
             background-position: center;
             border-radius: 20px;
@@ -62,6 +63,10 @@
 
         .metodo-pago {
             color: #777;
+        }
+        label{
+            color: #ffffff;
+            padding: 5px;
         }
     </style>
 </head>
